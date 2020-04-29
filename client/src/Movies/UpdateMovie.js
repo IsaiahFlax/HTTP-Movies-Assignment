@@ -19,7 +19,7 @@ function UpdateMovie(props) {
         if (selectedMovie) {
             setMovie(selectedMovie)
         }
-    }, [props.moviesList, props.match.params.id]);
+    }, [props.movieList, props.match.params.id]);
 
     const changeHandler = mv => {
         mv.persist()
@@ -39,8 +39,9 @@ const handleSubmit = e => {
         .then(res => {
             props.updateItems(res.data)
         }).catch(err => {
-            console.log(err)
+            console.log(err);
         })
+        props.history.push(`/movies/${movie.id}`)
     
 }
 
@@ -78,7 +79,7 @@ return (
             />
             <div className='baseline' />
 
-            <button type='submit' className='update-button'>Update Movie</button>
+            <button type='submit' className='update-button'>Save Changes</button>
         </form>
     </div>
 )
