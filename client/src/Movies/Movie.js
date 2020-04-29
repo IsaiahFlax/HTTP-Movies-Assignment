@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import MovieCard from "./MovieCard";
 
-function Movie({ addToSavedList }, props) {
+function Movie({ addToSavedList }) {
   const [movie, setMovie] = useState(null);
   const params = useParams();
 
@@ -33,7 +33,7 @@ function Movie({ addToSavedList }, props) {
       <div className="save-button" onClick={saveMovie}>
         Save
       </div>
-      <button onClick={()=>props.history.push(`/update-movie/${movie.id}`)} className='update-button'>Update Info</button>
+      <button className='update-button'><Link to={`/update-movie/${movie.id}`}>Update Info</Link></button>
     </div>
   );
 }

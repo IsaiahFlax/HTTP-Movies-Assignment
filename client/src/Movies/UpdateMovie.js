@@ -9,11 +9,11 @@ const initialItem = {
     stars: [],
 }
 
-const UpdateMovie = props => {
+function UpdateMovie(props) {
     const [movie, setMovie] = useState(initialItem)
 
     useEffect(() => {
-        const selectedMovie = props.moviesList.find(movie => {
+        const selectedMovie = props.movieList.find(movie => {
             return `${movie.id}` === props.match.params.id
         })
         if (selectedMovie) {
@@ -78,7 +78,7 @@ return (
             />
             <div className='baseline' />
 
-            <button className='update-button'>Update Movie</button>
+            <button type='submit' className='update-button'>Update Movie</button>
         </form>
     </div>
 )
