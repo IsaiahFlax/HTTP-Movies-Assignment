@@ -21,15 +21,20 @@ function UpdateMovie(props) {
         }
     }, [props.movieList, props.match.params.id]);
 
-    const changeHandler = mv => {
-        mv.persist()
-        let value = mv.target.value;
+//     const changeHandler = mv => {
+//         mv.persist()
+//         let value = mv.target.value;
     
 
-    setMovie({
-        ...movie,
-        [mv.target.name]: value
-    })
+//     setMovie({
+//         ...movie,
+//         [mv.target.name]: value
+//     })
+// }
+const changeHandler = e => {
+    e.preventDefault()
+    e.persist()
+    setMovie({...movie, [e.target.name]: e.target.value})
 }
 
 const handleSubmit = e => {
@@ -37,7 +42,7 @@ const handleSubmit = e => {
     axios
         .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
         .then(res => {
-            props.updateItems(res.data)
+            props.setMovieList(res.data)
         }).catch(err => {
             console.log(err);
         })
