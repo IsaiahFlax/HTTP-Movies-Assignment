@@ -11,6 +11,7 @@ const initialItem = {
 
 function UpdateMovie(props) {
     const [movie, setMovie] = useState(initialItem)
+    const [star, setStar] = useState('')
 
     useEffect(() => {
         const selectedMovie = props.movieList.find(movie => {
@@ -19,7 +20,8 @@ function UpdateMovie(props) {
         if (selectedMovie) {
             setMovie(selectedMovie)
         }
-    }, [props.movieList, props.match.params.id]);
+        console.log('update movie', props.match.params.title)
+    }, [props.movieList, props.match.params.title, props]);
 
 //     const changeHandler = mv => {
 //         mv.persist()
@@ -32,7 +34,6 @@ function UpdateMovie(props) {
 //     })
 // }
 const changeHandler = e => {
-    e.preventDefault()
     e.persist()
     setMovie({...movie, [e.target.name]: e.target.value})
 }
@@ -42,13 +43,20 @@ const handleSubmit = e => {
     axios
         .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
         .then(res => {
-            props.setMovieList(res.data)
+             props.setMovieList(res.data);
+             console.log('sent data', res.data)
         }).catch(err => {
             console.log(err);
         })
-        props.history.push(`/movies/${movie.id}`)
+        props.getMovieList()
+        props.history.push(`/`)
     
 }
+const handleNewStar = ev => {
+    ev.preventDefault()
+    setMovie({ ...movie, stars: [...movie.stars, star]})
+    setStar('')
+  }
 
 return (
     <div>
@@ -78,7 +86,7 @@ return (
                 <input
                 type="text"
                 name="stars"
-                onChange={changeHandler}
+                onChange={handleNewStar}
                 placeholder='stars'
                 value={movie.stars}
             />

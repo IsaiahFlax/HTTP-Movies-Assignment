@@ -30,7 +30,7 @@ const App = () => {
       <SavedList list={savedList} />
 
       <Route exact path="/"
-      render={props => (<MovieList {...props} movies={movieList} />)}>
+      render={props => (<MovieList {...props} movies={movieList} setMovieList={setMovieList} />)}>
         
       </Route>
 
@@ -40,7 +40,7 @@ const App = () => {
 
       <Route path='/update-movie/:id'
       render={props => (
-        <UpdateMovie {...props} movieList={movieList} setMovieList={setMovieList} />
+        <UpdateMovie {...props} movieList={movieList} setMovieList={setMovieList} getMovieList={getMovieList}/>
       )} />
     </>
   );
